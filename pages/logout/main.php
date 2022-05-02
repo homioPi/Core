@@ -4,5 +4,5 @@
 	}
 ?>
 <script>
-	HomioPi.page.load('login/main', true);
+	homioPi.page.load('login/main', true);
 </script>

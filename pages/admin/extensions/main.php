@@ -1,5 +1,5 @@
 <div class="input-search-wrapper">
-    <input class="extension-search mb-2" data-type="search" onchange="HomioPi.admin.extensions.print_list(event.target.value);">
+    <input class="extension-search mb-2" data-type="search" onchange="homioPi.admin.extensions.print_list(event.target.value);">
 </div>
 <div class="btn-list extension-search-results"></div>
 

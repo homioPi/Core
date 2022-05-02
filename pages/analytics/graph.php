@@ -103,14 +103,14 @@
 					</div>
 				</div>
 				<div class="graph-sidebar-item btn-list" data-type="multiple">
-					<div class="btn btn-md-square bg-tertiary btn-primary no-hover" data-graph-action="toggle_view" onchange="HomioPi.analytics.graph.toggleView();">
+					<div class="btn btn-md-square bg-tertiary btn-primary no-hover" data-graph-action="toggle_view" onchange="homioPi.analytics.graph.toggleView();">
 						<?php echo(create_icon([
 							'icon'    => 'far.expand',
 							'scale'   => 'md',
 							'classes' => ['text-info']
 						])); ?>
 					</div>
-					<div class="btn btn-md-square bg-tertiary btn-primary no-hover active" data-graph-action="toggle_steps" onchange="HomioPi.analytics.graph.toggleStepsVisibility();">
+					<div class="btn btn-md-square bg-tertiary btn-primary no-hover active" data-graph-action="toggle_steps" onchange="homioPi.analytics.graph.toggleStepsVisibility();">
 						<?php echo(create_icon([
 							'icon'    => 'far.grip-lines',
 							'scale'   => 'md',

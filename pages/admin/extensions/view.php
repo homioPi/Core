@@ -55,10 +55,10 @@
         </div>
         <div class="mt-2 col-12 col-md-auto">
             <div class="d-flex flex-row flex-wrap h-100 align-items-end">
-                <div class="btn btn-success bg-primary" data-extension-action="install" onclick="HomioPi.admin.extensions.install('<?php echo($extension['id']); ?>');"><?php echo(\HomioPi\Locale\translate('generic.action.install')); ?></div>
-                <div class="btn btn-danger bg-primary" data-extension-action="uninstall" onclick="HomioPi.admin.extensions.uninstall('<?php echo($extension['id']); ?>');"><?php echo(\HomioPi\Locale\translate('generic.action.uninstall')); ?></div>
-                <div class="btn btn-warning bg-primary" data-extension-action="disable" onclick="HomioPi.admin.extensions.disable('<?php echo($extension['id']); ?>');"><?php echo(\HomioPi\Locale\translate('generic.action.disable')); ?></div>
-                <div class="btn btn-success bg-primary" data-extension-action="enable" onclick="HomioPi.admin.extensions.enable('<?php echo($extension['id']); ?>');"><?php echo(\HomioPi\Locale\translate('generic.action.enable')); ?></div>
+                <div class="btn btn-success bg-primary" data-extension-action="install" onclick="homioPi.admin.extensions.install('<?php echo($extension['id']); ?>');"><?php echo(\HomioPi\Locale\translate('generic.action.install')); ?></div>
+                <div class="btn btn-danger bg-primary" data-extension-action="uninstall" onclick="homioPi.admin.extensions.uninstall('<?php echo($extension['id']); ?>');"><?php echo(\HomioPi\Locale\translate('generic.action.uninstall')); ?></div>
+                <div class="btn btn-warning bg-primary" data-extension-action="disable" onclick="homioPi.admin.extensions.disable('<?php echo($extension['id']); ?>');"><?php echo(\HomioPi\Locale\translate('generic.action.disable')); ?></div>
+                <div class="btn btn-success bg-primary" data-extension-action="enable" onclick="homioPi.admin.extensions.enable('<?php echo($extension['id']); ?>');"><?php echo(\HomioPi\Locale\translate('generic.action.enable')); ?></div>
             </div>
         </div>
     </div>

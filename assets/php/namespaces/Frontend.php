@@ -8,7 +8,7 @@
         $html .= '
             <script file="none">
                 var homioPi = {};
-                function homioPiAssign(e,i){(e=e.split(".")).reduce((n,o,t)=>void 0===n[o]&&t!==e.length-1?(n[o]={},n[o]):t===e.length-1?(n[o]=i,i):n[o],HomioPi)}
+                function homioPiAssign(e,i){(e=e.split(".")).reduce((n,o,t)=>void 0===n[o]&&t!==e.length-1?(n[o]={},n[o]):t===e.length-1?(n[o]=i,i):n[o],homioPi)}
                 homioPiAssign(\'data.config\', '.json_encode(CONFIG, JSON_UNESCAPED_SLASHES).');
                 homioPiAssign(\'data.locale.translations\', '.json_encode(TRANSLATIONS, JSON_UNESCAPED_SLASHES).');
                 homioPiAssign(\'data.users.currentUser\', '.json_encode(\HomioPi\Users\CurrentUser::getProperties(), JSON_UNESCAPED_SLASHES).');

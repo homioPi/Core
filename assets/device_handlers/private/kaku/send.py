@@ -34,9 +34,10 @@ try:
 	# Serial port is being kept open by the _tick process.
 	ser.write(bytes(cmd, encoding='utf-8'))
 
-	# Wait after sending the signal, to prevent the signal from not being sent succesfully
-	time.sleep(1.25)
-
-	print(json.dumps({'success': True}))
+	# Wait for a response from the Arduino
+	while True:
+		if(ser.inWaiting() > 0):
+			print(json.dumps({'success': True}))
+			quit()
 except Exception as err:
 	print(json.dumps({'success': False, 'data': str(err)}))

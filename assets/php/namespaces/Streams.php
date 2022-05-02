@@ -48,7 +48,7 @@
             $args = "{$this->id} {$name} ".shell_arg_encode($parameters);
             $cmd  = script_name_to_shell_cmd($stream_runner_path, $args);
 
-            $output = shell_exec_timeout($cmd, 15, true, true);
+            $output = execute($cmd, $output, 15);
 
             return true;
         }
@@ -74,7 +74,7 @@
                 shell_exec("{$cmd} > /dev/null 2>&1 &");
                 $json = '{"success":true}';
             } else {
-                $json = shell_exec_timeout($cmd, 15, false, false);
+                execute($cmd, $json, 15);
             }
 
             if(!($output = @json_decode($json, true))) {

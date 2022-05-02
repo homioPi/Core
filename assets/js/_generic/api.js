@@ -1,6 +1,6 @@
 HomioPi_assign('api', {
     call: (url, data) => {
-        url = `${HomioPi.data.webroot}/api/${url}/`;
+        url = `${homiopi.data.webroot}/api/${url}/`;
         let headers = {};
         let tokenId = localStorage.getItem('HomioPi_tokenId');
         let token = localStorage.getItem('HomioPi_token');
@@ -39,7 +39,7 @@ HomioPi_assign('api', {
 
                     if(response.responseJSON) {
                         if(response.responseJSON?.info == 'error_authorization') {
-                            HomioPi.page.load(`login/main?redirect=home/main`, true);
+                            homiopi.page.load(`login/main?redirect=home/main`, true);
                         }
                         reject(response.responseJSON);
                     } else {

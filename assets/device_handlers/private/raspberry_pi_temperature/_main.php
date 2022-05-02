@@ -16,8 +16,8 @@
 		$units = 'standard';
 	}
 
-	if($temperature_str = @trim(@shell_exec_timeout('sudo vcgencmd measure_temp', 2))) {
-		$temperature = floatval(preg_replace('/[^0-9.]/', '', $temperature_str));
+	if(@execute('sudo vcgencmd measure_temp', $temperature_str, 2)) {
+		$temperature = floatval(preg_replace('/[^0-9.]/', '', trim($temperature_str)));
 	}
 
 	$unit = substr($temperature_str, -1);

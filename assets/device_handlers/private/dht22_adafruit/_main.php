@@ -26,31 +26,31 @@
 
 	$cmd = "/usr/bin/python3 inner.py {$gpio_pin}";
 
-	if(!$dht22_json = @shell_exec_timeout(escapeshellcmd($cmd), 10)) {
+	if(!execute(escapeshellcmd($cmd, $output_json, 10)) {
 		exit('Failed to run script.');
 	}
 
-	if(($dht22_output = @json_decode($dht22_json, true)) === false) {
+	if(($output = @json_decode($output_json, true)) === false) {
 		exit(json_output('Failed to decode data returned from script.'));
 	}
 			
-	if($dht22_output['success'] != true || !isset($dht22_output['humidity']) || !isset($dht22_output['temperature'])) {
+	if($output['success'] != true || !isset($output['humidity']) || !isset($output['temperature'])) {
 		exit(json_output('Failed to decode data returned from script.'));
 	}
 
 	switch($units) {
 		case 'metric':
-			$dht22_output['temperature'] -= 273.15;
+			$output['temperature'] -= 273.15;
 			break;
 
 		case 'imperial':
-			$dht22_output['temperature'] = ($dht22_output['temperature'] - 273.15) * 9/5 + 32;
+			$output['temperature'] = ($output['temperature'] - 273.15) * 9/5 + 32;
 			break;
 	}
 
-	$dht22_output['temperature'] = round($dht22_output['temperature'], 3);
-	$dht22_output['humidity'] = round($dht22_output['humidity'], 3);
+	$output['temperature'] = round($output['temperature'], 3);
+	$output['humidity'] = round($output['humidity'], 3);
 
 	# Return DHT22 output
-	exit(json_output($dht22_output, 'success'));
+	exit(json_output($output, 'success'));
 ?>

@@ -265,6 +265,6 @@ $(document).on('click', '.input[data-type="toggle"]', function() {
 
 $(document).on('homiopi.load', function() {
 	$('.input-wrapper-search input').each(function() {
-		$(this).data('input', new HomioPi.ui.input.search($(this)));
+		$(this).data('input', new homiopi.ui.input.search($(this)));
 	})
 })

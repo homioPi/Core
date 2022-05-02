@@ -32,7 +32,11 @@
 	}
 
 	$cmd = "/usr/bin/python3 send.py {$options['address']} {$options['unit']} {$state} {$options['pulse_length']} {$options['port']} {$options['baud']}";
-	if(!$output = @json_decode(shell_exec_timeout($cmd, 10), true)) {
+	if(!@execute($cmd, $output_json, 10)) {
+		\HomioPi\Response\error();
+	}
+
+	if(($output = json_decode($output_json, true)) === false) {
 		\HomioPi\Response\error('invalid_output');
 	}
 

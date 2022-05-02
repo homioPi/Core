@@ -22,14 +22,14 @@ HomioPi_assign('message', {
     },
 
     info: (content) => {
-        HomioPi.message.send(content, 'info');
+        homiopi.message.send(content, 'info');
     },
 
     error: (content) => {
-        HomioPi.message.send(content, 'error');
+        homiopi.message.send(content, 'error');
     },
 
     warning: (content) => {
-        HomioPi.message.send(content, 'warning');
+        homiopi.message.send(content, 'warning');
     }
 })

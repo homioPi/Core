@@ -28,7 +28,7 @@
 
     $cmd = "/usr/bin/python3 inner.py {$port} {$dsmr_version}";
 
-    if(!$meter_json = @shell_exec_timeout(escapeshellcmd($cmd), 65)) {
+    if(!$execute(escapeshellcmd($cmd, $meter_json, 65)) {
 		\HomioPi\Response\error('error_running_script', 'Failed to run handler script.');
 	}
 

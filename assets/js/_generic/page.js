@@ -9,27 +9,27 @@ HomioPi_assign('page', {
     },
 
     get: (url, reload = false) => {
-        let currentPage = HomioPi.page.current();
+        let currentPage = homiopi.page.current();
         let old_animation_duration = parseFloat($('main').attr('data-animation-duration') || 0);
-        let reduced_motion = HomioPi.users.currentUser.getSetting('reduced_motion') || false;
+        let reduced_motion = homiopi.users.currentUser.getSetting('reduced_motion') || false;
 
         url = trim(trim(trim(url, '/'), '#'), '/');
 
         if(!reduced_motion) {
-            HomioPi.page.animateOut();
+            homiopi.page.animateOut();
         }
 
         // Show loading icon when old page has animated out but new page has not been received yet
         setTimeout(() => {
-            if(HomioPi.page.current() == currentPage) {
-                if(HomioPi.page.getStatus() != 'error') {
-                    HomioPi.page.setStatus('animating_loading');
+            if(homiopi.page.current() == currentPage) {
+                if(homiopi.page.getStatus() != 'error') {
+                    homiopi.page.setStatus('animating_loading');
                 }
             }
         }, old_animation_duration);
 
         // Make a request to load the page
-        HomioPi.api.call('page', {'url': url}).then((response) => {
+        homiopi.api.call('page', {'url': url}).then((response) => {
             let new_animation_duration = response.data.manifest.animation_duration || 0;
 
             $('body').attr('data-page', response.data.manifest.name.trim('/'));
@@ -51,29 +51,29 @@ HomioPi_assign('page', {
                 
                 $(document).trigger('homiopi.load');
 
-                HomioPi.page.setStatus('animating_in');
-                HomioPi.page.animateIn(new_animation_duration);
+                homiopi.page.setStatus('animating_in');
+                homiopi.page.animateIn(new_animation_duration);
             }, Math.max(old_animation_duration - response.took, 0));
         }).catch((err) => {
             console.error(err);
             $('main').html('');
-            HomioPi.page.setStatus('error');
+            homiopi.page.setStatus('error');
         });
     },
 
     animateOut: () => {
-        HomioPi.page.setStatus('animating_out');
+        homiopi.page.setStatus('animating_out');
         $('.popup-shield').removeClass('show');
     },
 
     animateIn: (animation_duration) => {
-        HomioPi.page.animationSetup(animation_duration);
+        homiopi.page.animationSetup(animation_duration);
         
-        HomioPi.page.setStatus('animating_in');
+        homiopi.page.setStatus('animating_in');
         setTimeout(() => {
             $(document).trigger('homiopi.ready');
             console.log('PAGE READY!');
-            HomioPi.page.setStatus('ready');
+            homiopi.page.setStatus('ready');
         }, animation_duration);
     },
 
@@ -121,13 +121,13 @@ HomioPi_assign('page', {
 
     setStatus: (status) => {
         $('body').attr('data-status', status);
-        return HomioPi.page;
+        return homiopi.page;
     },
 
     reload: () => {
-        console.log(HomioPi.page.current(true));
-        HomioPi.page.get(HomioPi.page.current(true));
-        return HomioPi.page;
+        console.log(homiopi.page.current(true));
+        homiopi.page.get(homiopi.page.current(true));
+        return homiopi.page;
     }
 })
 
@@ -135,13 +135,13 @@ $(window).on('load', function() {
 	let page = window.location.hash.substring(1);
 
     if(page == '') {
-	    HomioPi.page.get('home/main');
+	    homiopi.page.get('home/main');
     } else {
-        HomioPi.page.get(page);
+        homiopi.page.get(page);
     }
 })
 
 $(window).on('hashchange', function() {
 	let page = window.location.hash.substring(1);
-	HomioPi.page.get(page);
+	homiopi.page.get(page);
 })

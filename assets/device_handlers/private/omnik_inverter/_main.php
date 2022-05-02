@@ -32,18 +32,18 @@
 	
 	$cmd = "/usr/bin/python3 inner.py {$ip} {$port} {$wifi_sn}";
 
-	if(!$omnik_json = @shell_exec_timeout(escapeshellcmd($cmd), 10)) {
+	if(!@execute(escapeshellcmd($cmd), $output_json, 10)) {
 		\HomioPi\Response\error('error_running_script', 'Failed to run handler script.');
 	}
 	
-	if(($inverter_data = @json_decode($omnik_json, true)) === false) {
+	if(($output = @json_decode($output_json, true)) === false) {
 		\HomioPi\Response\error('error_decoding_data', 'Failed to decode data returned from handler script.');
 	}
 	
-	if($inverter_data['success'] != true || !isset($inverter_data['pv']) || !is_array($inverter_data['pv'])) {
+	if($output['success'] != true || !isset($output['pv']) || !is_array($output['pv'])) {
 		\HomioPi\Response\error('error_parsing_data', 'Failed to parse data returned from handler script.');
 	}
 
  	// Return inverter data
-	\HomioPi\Response\success(null, $inverter_data);
+	\HomioPi\Response\success(null, $output);
 ?>

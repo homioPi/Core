@@ -2,19 +2,19 @@ var updateValuesTimeout;
 
 HomioPi_assign('devices', {
 	updateValuesLoop: (interval = 1000) => {
-		// if(HomioPi.page.current() != 'devices/main') {
+		// if(homiopi.page.current() != 'devices/main') {
 		// 	return false;
 		// }
 
-		HomioPi.devices.updateValues();
+		homiopi.devices.updateValues();
 		
 		updateValuesTimeout = setTimeout(() => {
-			HomioPi.devices.updateValuesLoop(interval);
+			homiopi.devices.updateValuesLoop(interval);
 		}, interval);
 	},
 
 	updateValues: () => {
-		HomioPi.api.call('devices-get-values', {}).then((response) => {
+		homiopi.api.call('devices-get-values', {}).then((response) => {
 			$.each(response.data, function(deviceId, properties) {
 				const $device = $(`.device[data-id="${deviceId}"]`);
 
@@ -38,12 +38,12 @@ HomioPi_assign('devices', {
 })
 
 $(document).on('homiopi.ready', () => {
-	if(HomioPi.page.current() != 'devices/main') {
+	if(homiopi.page.current() != 'devices/main') {
 		console.log(updateValuesTimeout);
 		clearTimeout(updateValuesTimeout);
 	}
 
-	HomioPi.devices.updateValuesLoop()
+	homiopi.devices.updateValuesLoop()
 });
 
 $(document).ready(function() {
@@ -63,7 +63,7 @@ function loadDeviceSearchResults($device) {
 	let $input  = $device.find('.input[data-type="search"]');
 	let handler = $device.attr('data-search-handler');
 	let term    = $input.val();
-	let url     = `${HomioPi.data.webroot}/assets/device_handlers/public/${handler}/search.php?id=${$device.attr('data-id')}&value=${term}`;
+	let url     = `${homiopi.data.webroot}/assets/device_handlers/public/${handler}/search.php?id=${$device.attr('data-id')}&value=${term}`;
 
 	$input.parent().showLoading();
 	$.get(url, function(response) {
@@ -95,8 +95,8 @@ $(document).on('click', '.categories-list-row', debounce(function() {
 
 	console.log('debounce!');
 
-	HomioPi.users.currentUser.setSetting('devices_inactive_categories', inactive_categories).then(() => {
-		HomioPi.page.reload();
+	homiopi.users.currentUser.setSetting('devices_inactive_categories', inactive_categories).then(() => {
+		homiopi.page.reload();
 	}).catch();
 }, 500))
 
@@ -139,16 +139,16 @@ function setDeviceValue($device, value, shownValue = undefined) {
 		'force_set':   $device.attr('data-force-set')
 	};
 	
-	HomioPi.api.call('device-set-value', data).then(() => {
+	homiopi.api.call('device-set-value', data).then(() => {
 		$device.attr('data-value-updating-disabled', 'false');
 		$deviceName.hideLoading();
 
 		console.log('Device value changed!');
 
 		if(controlType == 'toggle') {
-			HomioPi.message.send(HomioPi.locale.translate(`devices.message.toggled_${value}_success`, [deviceName]));
+			homiopi.message.send(homiopi.locale.translate(`devices.message.toggled_${value}_success`, [deviceName]));
 		} else {
-			HomioPi.message.send(HomioPi.locale.translate(`devices.message.changed_success`, [deviceName, shownValue]));
+			homiopi.message.send(homiopi.locale.translate(`devices.message.changed_success`, [deviceName, shownValue]));
 		}
 
 	}).catch(() => {
@@ -158,9 +158,9 @@ function setDeviceValue($device, value, shownValue = undefined) {
 		console.error('Failed to change device value.');
 
 		if(controlType == 'toggle') {
-			HomioPi.message.error(HomioPi.locale.translate(`devices.error.toggled_${value}_error`, [deviceName]));
+			homiopi.message.error(homiopi.locale.translate(`devices.error.toggled_${value}_error`, [deviceName]));
 		} else {
-			HomioPi.message.error(HomioPi.locale.translate(`devices.error.changed_error`, [deviceName, shownValue]));
+			homiopi.message.error(homiopi.locale.translate(`devices.error.changed_error`, [deviceName, shownValue]));
 		}
 	})
 }

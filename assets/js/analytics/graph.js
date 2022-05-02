@@ -26,8 +26,8 @@ HomioPi_assign('analytics.graph', {
 	},
 
 	eventMouseMove(e) {
-		let relativeX = clamp(0, HomioPi.data.pointer.x - this.$graph.offset().left, this.$graph.outerWidth());
-		let relativeY = clamp(0, HomioPi.data.pointer.y - this.$graph.offset().top, this.$graph.outerHeight());
+		let relativeX = clamp(0, homiopi.data.pointer.x - this.$graph.offset().left, this.$graph.outerWidth());
+		let relativeY = clamp(0, homiopi.data.pointer.y - this.$graph.offset().top, this.$graph.outerHeight());
 		
 		this.moveCrosshairs(relativeX, relativeY);
 		this.moveTooltip(relativeX, relativeY);
@@ -86,7 +86,7 @@ HomioPi_assign('analytics.graph', {
 	paintInfo(debug) {
 		console.log(this.selection_points);
 		return new Promise((resolve, reject) => {
-			HomioPi.api.call('analytic-json', {
+			homiopi.api.call('analytic-json', {
 				'id': this.analyticId,
 				'max_rows': this.maxRows,
 				'selection': this.selection_points,
@@ -101,17 +101,17 @@ HomioPi_assign('analytics.graph', {
 					let horAxisTitle = `${this.manifest.axes.x.title}` + (this.manifest.axes.x.unit.length > 0 ? ` (${this.manifest.axes.x.unit})` : '');
 					let verAxisTitle = `${this.manifest.axes.y.title}` + (this.manifest.axes.x.unit?.length > 0 ? ` (${this.manifest.axes.y.unit})` : '');
 
-					HomioPi.analytics.graph.paintAxisTitles(horAxisTitle, verAxisTitle);
+					homiopi.analytics.graph.paintAxisTitles(horAxisTitle, verAxisTitle);
 
-					HomioPi.analytics.graph.paintAxisSteps();
+					homiopi.analytics.graph.paintAxisSteps();
 
-					HomioPi.analytics.graph.paintTooltipItem(response.data.manifest.axes.x.title, 'var(--text)', 'x', response.data.manifest.axes.x.unit, false);
+					homiopi.analytics.graph.paintTooltipItem(response.data.manifest.axes.x.title, 'var(--text)', 'x', response.data.manifest.axes.x.unit, false);
 
 					$.each(response.data.manifest.columns, function(column, info) {
 						let axis = column.substring(0, 1);
 
-						HomioPi.analytics.graph.paintLegendItem(info.title, info.color, column);
-						HomioPi.analytics.graph.paintTooltipItem(info.title, info.color, column, response.data.manifest.axes[axis].unit);
+						homiopi.analytics.graph.paintLegendItem(info.title, info.color, column);
+						homiopi.analytics.graph.paintTooltipItem(info.title, info.color, column, response.data.manifest.axes[axis].unit);
 
 						resolve(this);
 					})
@@ -178,7 +178,7 @@ HomioPi_assign('analytics.graph', {
 			this.$graphBody.popupDismantle();
 		}
 
-		HomioPi.analytics.graph.paint();
+		homiopi.analytics.graph.paint();
 
 		return this;
 	},
@@ -193,7 +193,7 @@ HomioPi_assign('analytics.graph', {
 		this.setStatus('loading');
 
 		return new Promise((resolve, reject) => {
-			HomioPi.api.call('analytic-graph', {
+			homiopi.api.call('analytic-graph', {
 				'id': this.analyticId,
 				'max_rows': this.maxRows,
 				'selection': this.selection_points
@@ -338,9 +338,9 @@ $(document).on('mouseenter mouseleave mousemove touchmove', '.graph-body', funct
 	let $graph             = $('.graph');
 	let $graphTooltip      = $('.graph-tooltip');
 	let $graphTarget       = $graphContainer.find('.graph-target');
-	let size               = HomioPi.analytics.graph.data('size');
-	let rows               = HomioPi.analytics.graph.data('rows');
-	let manifest           = HomioPi.analytics.graph.data('manifest');
+	let size               = homiopi.analytics.graph.data('size');
+	let rows               = homiopi.analytics.graph.data('rows');
+	let manifest           = homiopi.analytics.graph.data('manifest');
 
 	let mouseTop  = clamp(0, mouseY - $graph.offset().top, $graph.outerHeight());
 	let mouseLeft = clamp(0, mouseX - $graph.offset().left, $graph.outerWidth())
@@ -348,12 +348,12 @@ $(document).on('mouseenter mouseleave mousemove touchmove', '.graph-body', funct
 	// Paint selection if user is pressing left mouse button
 	if(mouseDown) {
 		try {
-			let selection = HomioPi.analytics.graph.data('selection');
+			let selection = homiopi.analytics.graph.data('selection');
 
 			if(typeof selection == 'undefined' || selection.length < 4) {
-				HomioPi.analytics.graph.paintSelectionFrame(mouseLeft, mouseTop, mouseLeft, mouseTop);
+				homiopi.analytics.graph.paintSelectionFrame(mouseLeft, mouseTop, mouseLeft, mouseTop);
 			} else {
-				HomioPi.analytics.graph.paintSelectionFrame(selection.x0, selection.y0, mouseLeft, mouseTop);
+				homiopi.analytics.graph.paintSelectionFrame(selection.x0, selection.y0, mouseLeft, mouseTop);
 			}
 		} catch(err) {
 			console.error(err);
@@ -435,8 +435,8 @@ $(document).on('mouseenter mouseleave mousemove touchmove', '.graph-body', funct
 })
 
 $(document).on('homiopi.load', function() {
-	if(HomioPi.page.current() == 'analytics/graph') {
+	if(homiopi.page.current() == 'analytics/graph') {
 		let analyticId = urlParam('id');
-		HomioPi.analytics.graph.setup($('.graph'), analyticId).paint();
+		homiopi.analytics.graph.setup($('.graph'), analyticId).paint();
 	}
 })

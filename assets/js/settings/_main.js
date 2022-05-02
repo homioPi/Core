@@ -9,13 +9,13 @@ $(document).on('homiopi.change', '.setting input', function() {
 
 	$wrapper.showLoading();
 
-	HomioPi.users.currentUser.setSetting(key, value).then(() => {
+	homiopi.users.currentUser.setSetting(key, value).then(() => {
 		$wrapper.hideLoading();
 		
 		if($setting.attr('data-needs-reload') == 'true') {
 			window.location.reload();
 		} else {
-			HomioPi.message.send(HomioPi.locale.translate('settings.message.setting_changed', [key_shown, value_shown]));
+			homiopi.message.send(homiopi.locale.translate('settings.message.setting_changed', [key_shown, value_shown]));
 		}
 	})
 })

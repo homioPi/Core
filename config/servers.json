@@ -1,0 +1,4 @@
+{
+    "extensions_catalogue": "https://tjalling.net/homiopi/api/extensions/catalogue/",
+    "extensions_update_check": "https://tjalling.net/homiopi/api/extensions/check-for-update/"
+}

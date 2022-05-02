@@ -1,0 +1,22 @@
+<?php
+	chdir(__DIR__);
+	include_once("{$_SERVER['DOCUMENT_ROOT']}/autoload.php");
+?>
+<?php 
+    // Check if user has permission to manage extensions
+    if(\HomioPi\Users\CurrentUser::getFlag('is_admin') !== true) {
+        \HomioPi\Response\error('no_permission', 'You don\'t have permission to manage extensions settings');
+    }
+    
+    // Check if extension id is given
+	if(!isset($_POST['id'])) {
+		\HomioPi\Response\error('request_field_missing', 'Field id is missing.');
+	}
+    $extension_id = basename($_POST['id']);
+
+    // Install the extension
+    \HomioPi\Extensions\install($extension_id);
+
+    $extension = new \HomioPi\Extensions\Extension($extension_id);
+    \HomioPi\Response\success('installed', $extension->getProperties());
+?>

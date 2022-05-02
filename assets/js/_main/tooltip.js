@@ -17,7 +17,7 @@ $(document).on('mouseenter mousemove focus', '[data-tooltip]', function(e) {
     $tooltip.attr('data-position', position).html(text);
 
     $tooltip.addClass('show');
-    $tooltip.css({'top': homiopi.data.pointer.y, 'left': homiopi.data.pointer.x})
+    $tooltip.css({'top': homioPi.data.pointer.y, 'left': homioPi.data.pointer.x})
 }).on('mouseleave focusout', '[data-tooltip], #tooltip', function(e) {
     const $tooltip = $('#tooltip');
     $tooltip.removeClass('show');

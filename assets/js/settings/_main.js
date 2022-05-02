@@ -1,4 +1,4 @@
-$(document).on('homiopi.change', '.setting input', function() {
+$(document).on('homioPi.change', '.setting input', function() {
 	let $input      = $(this);
 	let $wrapper    = $input.closest('.input-wrapper');
 	let $setting    = $input.closest('[data-setting]');
@@ -9,13 +9,13 @@ $(document).on('homiopi.change', '.setting input', function() {
 
 	$wrapper.showLoading();
 
-	homiopi.users.currentUser.setSetting(key, value).then(() => {
+	homioPi.users.currentUser.setSetting(key, value).then(() => {
 		$wrapper.hideLoading();
 		
 		if($setting.attr('data-needs-reload') == 'true') {
 			window.location.reload();
 		} else {
-			homiopi.message.send(homiopi.locale.translate('settings.message.setting_changed', [key_shown, value_shown]));
+			homioPi.message.send(homioPi.locale.translate('settings.message.setting_changed', [key_shown, value_shown]));
 		}
 	})
 })

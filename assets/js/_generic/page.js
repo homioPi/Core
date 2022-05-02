@@ -1,4 +1,4 @@
-HomioPi_assign('page', {
+homioPiAssign('page', {
     load: (page, reload = false) => {
         page = trim(trim(trim(page, '/'), '#'), '/');
         window.location.hash = `/${page}`;
@@ -9,27 +9,27 @@ HomioPi_assign('page', {
     },
 
     get: (url, reload = false) => {
-        let currentPage = homiopi.page.current();
+        let currentPage = homioPi.page.current();
         let old_animation_duration = parseFloat($('main').attr('data-animation-duration') || 0);
-        let reduced_motion = homiopi.users.currentUser.getSetting('reduced_motion') || false;
+        let reduced_motion = homioPi.users.currentUser.getSetting('reduced_motion') || false;
 
         url = trim(trim(trim(url, '/'), '#'), '/');
 
         if(!reduced_motion) {
-            homiopi.page.animateOut();
+            homioPi.page.animateOut();
         }
 
         // Show loading icon when old page has animated out but new page has not been received yet
         setTimeout(() => {
-            if(homiopi.page.current() == currentPage) {
-                if(homiopi.page.getStatus() != 'error') {
-                    homiopi.page.setStatus('animating_loading');
+            if(homioPi.page.current() == currentPage) {
+                if(homioPi.page.getStatus() != 'error') {
+                    homioPi.page.setStatus('animating_loading');
                 }
             }
         }, old_animation_duration);
 
         // Make a request to load the page
-        homiopi.api.call('page', {'url': url}).then((response) => {
+        homioPi.api.call('page', {'url': url}).then((response) => {
             let new_animation_duration = response.data.manifest.animation_duration || 0;
 
             $('body').attr('data-page', response.data.manifest.name.trim('/'));
@@ -49,31 +49,31 @@ HomioPi_assign('page', {
                 $('.sidenav-link').removeClass('active');
                 $(`.sidenav-link[data-target="${response.data.manifest.name.split('/')[0]}"]`).addClass('active');
                 
-                $(document).trigger('homiopi.load');
+                $(document).trigger('homioPi.load');
 
-                homiopi.page.setStatus('animating_in');
-                homiopi.page.animateIn(new_animation_duration);
+                homioPi.page.setStatus('animating_in');
+                homioPi.page.animateIn(new_animation_duration);
             }, Math.max(old_animation_duration - response.took, 0));
         }).catch((err) => {
             console.error(err);
             $('main').html('');
-            homiopi.page.setStatus('error');
+            homioPi.page.setStatus('error');
         });
     },
 
     animateOut: () => {
-        homiopi.page.setStatus('animating_out');
+        homioPi.page.setStatus('animating_out');
         $('.popup-shield').removeClass('show');
     },
 
     animateIn: (animation_duration) => {
-        homiopi.page.animationSetup(animation_duration);
+        homioPi.page.animationSetup(animation_duration);
         
-        homiopi.page.setStatus('animating_in');
+        homioPi.page.setStatus('animating_in');
         setTimeout(() => {
-            $(document).trigger('homiopi.ready');
+            $(document).trigger('homioPi.ready');
             console.log('PAGE READY!');
-            homiopi.page.setStatus('ready');
+            homioPi.page.setStatus('ready');
         }, animation_duration);
     },
 
@@ -121,13 +121,13 @@ HomioPi_assign('page', {
 
     setStatus: (status) => {
         $('body').attr('data-status', status);
-        return homiopi.page;
+        return homioPi.page;
     },
 
     reload: () => {
-        console.log(homiopi.page.current(true));
-        homiopi.page.get(homiopi.page.current(true));
-        return homiopi.page;
+        console.log(homioPi.page.current(true));
+        homioPi.page.get(homioPi.page.current(true));
+        return homioPi.page;
     }
 })
 
@@ -135,13 +135,13 @@ $(window).on('load', function() {
 	let page = window.location.hash.substring(1);
 
     if(page == '') {
-	    homiopi.page.get('home/main');
+	    homioPi.page.get('home/main');
     } else {
-        homiopi.page.get(page);
+        homioPi.page.get(page);
     }
 })
 
 $(window).on('hashchange', function() {
 	let page = window.location.hash.substring(1);
-	homiopi.page.get(page);
+	homioPi.page.get(page);
 })

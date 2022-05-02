@@ -1,4 +1,4 @@
-HomioPi_assign('template', {
+homioPiAssign('template', {
     get: (selector) => {
         const $template = $(`${selector}.template`).first();
 

@@ -7,12 +7,12 @@
         // Print variables
         $html .= '
             <script file="none">
-                var HomioPi = {};
-                function HomioPi_assign(e,i){(e=e.split(".")).reduce((n,o,t)=>void 0===n[o]&&t!==e.length-1?(n[o]={},n[o]):t===e.length-1?(n[o]=i,i):n[o],HomioPi)}
-                HomioPi_assign(\'data.config\', '.json_encode(CONFIG, JSON_UNESCAPED_SLASHES).');
-                HomioPi_assign(\'data.locale.translations\', '.json_encode(TRANSLATIONS, JSON_UNESCAPED_SLASHES).');
-                HomioPi_assign(\'data.users.currentUser\', '.json_encode(\HomioPi\Users\CurrentUser::getProperties(), JSON_UNESCAPED_SLASHES).');
-                HomioPi_assign(\'data.webroot\', \''.\HomioPi\Config\get('env_webroot').'\');
+                var homioPi = {};
+                function homioPiAssign(e,i){(e=e.split(".")).reduce((n,o,t)=>void 0===n[o]&&t!==e.length-1?(n[o]={},n[o]):t===e.length-1?(n[o]=i,i):n[o],HomioPi)}
+                homioPiAssign(\'data.config\', '.json_encode(CONFIG, JSON_UNESCAPED_SLASHES).');
+                homioPiAssign(\'data.locale.translations\', '.json_encode(TRANSLATIONS, JSON_UNESCAPED_SLASHES).');
+                homioPiAssign(\'data.users.currentUser\', '.json_encode(\HomioPi\Users\CurrentUser::getProperties(), JSON_UNESCAPED_SLASHES).');
+                homioPiAssign(\'data.webroot\', \''.\HomioPi\Config\get('env_webroot').'\');
             </script>
         ';
 

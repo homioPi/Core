@@ -7,11 +7,11 @@ $(document).on('submit', 'form#login-form', function(e) {
 	let username = $form.find('[name="username"]').val();
 	let password = $form.find('[name="password"]').val();
 
-	homiopi.api.call('login-verify', {'username': username, 'password': password}).then((response) => {
+	homioPi.api.call('login-verify', {'username': username, 'password': password}).then((response) => {
 		$form.find('button').hideLoading();
-		homiopi.page.load(urlParam('redirect') || 'home/main', true);
+		homioPi.page.load(urlParam('redirect') || 'home/main', true);
 	}).catch(() => {
 		$form.find('button').hideLoading();
-		homiopi.message.error(homiopi.locale.translate('login.invalid_credentials'));
+		homioPi.message.error(homioPi.locale.translate('login.invalid_credentials'));
 	}) 
 })

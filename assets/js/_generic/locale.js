@@ -1,10 +1,10 @@
-HomioPi_assign('locale', {
+homioPiAssign('locale', {
     translate: (key, replacements = []) => {
-        if(!(key in homiopi.data.locale.translations)) {
+        if(!(key in homioPi.data.locale.translations)) {
             return key;
         }
 
-        let translation = homiopi.data.locale.translations[key]
+        let translation = homioPi.data.locale.translations[key]
         let replacements_count = replacements.length;
 
         for (let i = replacements_count-1; i >= 0; i--) {

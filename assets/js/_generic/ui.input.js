@@ -1,7 +1,7 @@
 /* ================================ */
 /*        INPUT TYPE: SEARCH        */
 /* ================================ */
-HomioPi_assign('ui.input.search', class {
+homioPiAssign('ui.input.search', class {
 	constructor($input) {
 		this.$input   = $input;
 		this.$wrapper = $input.parents('.input-wrapper.input-wrapper-search').first();
@@ -90,7 +90,7 @@ HomioPi_assign('ui.input.search', class {
 		}
 		
 		this.$input.value(value, shownValue);
-		this.$input.trigger('homiopi.change');
+		this.$input.trigger('homioPi.change');
 
 	}
 })
@@ -138,7 +138,7 @@ $(document).on('click', '.input[data-type="checkbox"]', function() {
 })
 
 // Make range thumbs draggable
-$(document).on('homiopi.load', function() {
+$(document).on('homioPi.load', function() {
 	$(document).find('.input[data-type="range"]').each(function() {
 		let $input = $(this);
 
@@ -263,8 +263,8 @@ $(document).on('click', '.input[data-type="toggle"]', function() {
 	$(this).attr('data-value', $(this).attr('data-value') == 'on' ? 'off' : 'on').trigger('change');
 })
 
-$(document).on('homiopi.load', function() {
+$(document).on('homioPi.load', function() {
 	$('.input-wrapper-search input').each(function() {
-		$(this).data('input', new homiopi.ui.input.search($(this)));
+		$(this).data('input', new homioPi.ui.input.search($(this)));
 	})
 })

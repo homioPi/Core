@@ -87,13 +87,13 @@ function clamp(min, val, max) {
 $(document).on('mousedown touchstart', function(e) {
 	switch(e.which) {
 		case 1:
-			HomioPi_assign('data.pointer.down.primary', true);
+			homioPiAssign('data.pointer.down.primary', true);
 			break;
 		case 2:
-			HomioPi_assign('data.pointer.down.middle', true);
+			homioPiAssign('data.pointer.down.middle', true);
 			break;
 		case 3:
-			HomioPi_assign('data.pointer.down.secondary', true);
+			homioPiAssign('data.pointer.down.secondary', true);
 			break;
 	}
 })
@@ -101,23 +101,23 @@ $(document).on('mousedown touchstart', function(e) {
 $(document).on('mouseup touchend', function(e) {
 	switch(e.which) {
 		case 1:
-			HomioPi_assign('data.pointer.down.primary', null);
+			homioPiAssign('data.pointer.down.primary', null);
 			break;
 		case 2:
-			HomioPi_assign('data.pointer.down.middle', null);
+			homioPiAssign('data.pointer.down.middle', null);
 			break;
 		case 3:
-			HomioPi_assign('data.pointer.down.secondary', null);
+			homioPiAssign('data.pointer.down.secondary', null);
 			break;
 	}
 })
 
 $(document).on('mousedown mousemove mouseup touchstart touchmove touchend', function(e) {
 	if(typeof e.pageX == 'undefined') { // Touch devices
-		HomioPi_assign('data.pointer.x', e.changedTouches[0].pageX);
-		HomioPi_assign('data.pointer.y', e.changedTouches[0].pageY);
+		homioPiAssign('data.pointer.x', e.changedTouches[0].pageX);
+		homioPiAssign('data.pointer.y', e.changedTouches[0].pageY);
 	} else {
-		HomioPi_assign('data.pointer.x', e.pageX);
-		HomioPi_assign('data.pointer.y', e.pageY);
+		homioPiAssign('data.pointer.x', e.pageX);
+		homioPiAssign('data.pointer.y', e.pageY);
 	}
 })

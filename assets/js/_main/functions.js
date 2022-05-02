@@ -193,7 +193,7 @@ function urlParam(key) {
 
 function saveState(key, value, uuid = null) {
 	return new Promise((resolve, reject) => {
-		homiopi.api.call('user-set-setting', {'key': key, 'value': value, 'uuid': uuid}).then(() => {
+		homioPi.api.call('user-set-setting', {'key': key, 'value': value, 'uuid': uuid}).then(() => {
 			resolve();
 		}).catch(() => {
 			reject();

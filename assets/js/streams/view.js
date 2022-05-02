@@ -1,4 +1,4 @@
-$(document).on('homiopi.search_value_change', '.stream-sub-category .input.stream-card-search', function() {
+$(document).on('homioPi.search_value_change', '.stream-sub-category .input.stream-card-search', function() {
     // Show correct stream card
     let $input                        = $(this);
     let $stream_sub_category          = $input.parents('.stream-sub-category');

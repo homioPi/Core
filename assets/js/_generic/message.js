@@ -1,4 +1,4 @@
-HomioPi_assign('message', {
+homioPiAssign('message', {
     send: (content, type = 'info', duration = 2500) => {
         const messageId = 'homiopi-message-' + Date.now();
         const $message = $(`<div id="${messageId}" data-message-type="${type}" class="message animate-in"><div class="message-inner">${content}</div></div>`);
@@ -22,14 +22,14 @@ HomioPi_assign('message', {
     },
 
     info: (content) => {
-        homiopi.message.send(content, 'info');
+        homioPi.message.send(content, 'info');
     },
 
     error: (content) => {
-        homiopi.message.send(content, 'error');
+        homioPi.message.send(content, 'error');
     },
 
     warning: (content) => {
-        homiopi.message.send(content, 'warning');
+        homioPi.message.send(content, 'warning');
     }
 })

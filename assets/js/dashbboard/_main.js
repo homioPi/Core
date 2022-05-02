@@ -1,5 +1,5 @@
-$(document).on('homiopi.ready', function() {
-	if(homiopi.page.current() != 'dashboard/main') {
+$(document).on('homioPi.ready', function() {
+	if(homioPi.page.current() != 'dashboard/main') {
 		return;
 	}
 
@@ -7,7 +7,7 @@ $(document).on('homiopi.ready', function() {
 		return;
 	}
 
-	$.each(homiopi.data.dashboard.widgets, function(widgetId, widget) {
+	$.each(homioPi.data.dashboard.widgets, function(widgetId, widget) {
 		// Find widget element
 		const elem = document.querySelector(`[data-widget-id="${widgetId}"] .dashboard-widget-content`);
 
